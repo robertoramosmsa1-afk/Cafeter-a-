@@ -1,47 +1,94 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AbleSign Display</title>
-    <style>
-        /* Aquí puedes personalizar el estilo de tu página */
+    <title>Servicio de Cafeteriía Al grano</title>
+    <meta http-equiv="refresh" content="60">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>    
+    /* Estilos generales */
         body {
-            font-family: sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #495057;
             margin: 0;
             padding: 20px;
         }
+
+        /* Estilos para el contenedor de mosaico (GRID) */
         .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 800px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px; /* Aumentamos el espacio entre los mosaicos */
+            max-width: 1500px;
             margin: auto;
+            min-height: 100vh; /* Define una altura mínima para el contenedor */
+            align-items: center; /* Centra los elementos verticalmente */
+            justify-content: center; /* Centra los elementos horizontalmente (opcional, ya lo hace margin: auto;) */
         }
+
+        /* Estilos para cada mosaico (item) */
         .item {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid #748DAB;
         }
+
+        .item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
         .item h2 {
             margin-top: 0;
-            color: #0056b3;
+            font-size: 1.25rem;
+            color: #748DAB;
+            text-align: center;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            height: 50px
         }
-        .item p {
-            margin: 5px 0;
+
+        /* Estilo para las filas de información */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 10px 0;
+            font-size: 0.95rem;
+        }
+        .info-label {
+            font-weight: bold;
+            flex-shrink: 0;
+            color: #212529;
+        }
+        .info-row span:last-child {
+            text-align: right;
+            color: #6c757d;
+        }
+
+        /* Estilos de respuesta para pantallas pequeñas */
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container" id="content-container">
-        </div>
+    </div>
     
     <script>
-        // Reemplaza esta URL con la tuya
-        const apiUrl = 'https://script.google.com/macros/s/AKfycbzGR8CyHyfhcYpntQUhG26E8xcUk1A6tOVLGWBGXoGs4ZbPspZ1MbErGPhLlorwFub2/exec'; 
+        // ¡IMPORTANTE! Reemplaza esta URL con la tuya de Google Apps Script.
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbz-gthCDdLTJlrBRHBHp9Pxe6C0VSLpxDbuwu4IcJRzdGwJ1vmtjxHTH2z8QoLRxqAJ/exec';
 
         fetch(apiUrl)
             .then(response => {
@@ -58,25 +105,59 @@
                     const element = document.createElement('div');
                     element.classList.add('item'); 
                     element.innerHTML = `
-    			<h2>${item['En honor a']}</h2>
-    			<p><b>Lugar de Velación:</b> ${item['Lugar de Velaciòn']}</p>
-    			<p><b>Sala:</b> ${item.Sala}</p>
-    			<p><b>Fecha de Inicio:</b> ${item['Fecha de Inicio']}</p>
-    			<p><b>Hora de Inicio:</b> ${item['Hora de Inicio']}</p>
-    			<p><b>Ceremonia Religiosa:</b> ${item['Ceremonia Religiosa']}</p>
-    			<p><b>Fecha Ceremonia:</b> ${item['Fecha Ceremonia']}</p>
-    			<p><b>Hora Ceremonia:</b> ${item['Hora Ceremonia']}</p>
-    			<p><b>Destino Final:</b> ${item['Destino Final']}</p>
-    			<p><b>Fecha:</b> ${item.Fecha}</p>
-    			<p><b>Hora:</b> ${item.Hora}</p>
-			`;
+                        <h2>${item['En honor a']}</h2>
+                        <div class="info-row">
+                            <span class="info-label">Lugar de Velación:</span>
+                            <span>${item['Lugar de Velaciòn']}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Sala:</span>
+                            <span>${item.Sala}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Fecha de Inicio:</span>
+                            <span>${item['Fecha de Inicio']}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hora de Inicio:</span>
+                            <span>${item['Hora de Inicio']}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Ceremonia Religiosa:</span>
+                            <span>${item['Ceremonia Religiosa']}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Fecha Ceremonia:</span>
+                            <span>${item['Fecha Ceremonia']}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hora Ceremonia:</span>
+                            <span>${item['Hora Ceremonia']}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Destino Final:</span>
+                            <span>${item['Destino Final']}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Fecha:</span>
+                            <span>${item.Fecha}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hora:</span>
+                            <span>${item.Hora}</span>
+                        </div>
+                    `;
                     container.appendChild(element);
                 });
             })
             .catch(error => {
                 console.error('Hubo un problema con la solicitud:', error);
-                document.getElementById('content-container').innerHTML = `<p style="color: red;">Error al cargar el contenido. Por favor, revisa la consola para más detalles.</p>`;
+                document.getElementById('content-container').innerHTML = `<p style="color: red; text-align: center;">Error al cargar el contenido. Por favor, revisa la consola para más detalles.</p>`;
             });
+    </script>
+</body>
+</html>
+    
     </script>
 </body>
 </html>
