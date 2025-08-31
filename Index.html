@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbleSign Display</title>
+    <style>
+        /* Aquí puedes personalizar el estilo de tu página */
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .item h2 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+        .item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content-container">
+        </div>
+    
+    <script>
+        // Reemplaza esta URL con la tuya
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbzGR8CyHyfhcYpntQUhG26E8xcUk1A6tOVLGWBGXoGs4ZbPspZ1MbErGPhLlorwFub2/exec'; 
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const container = document.getElementById('content-container');
+                container.innerHTML = ''; 
+
+                data.forEach(item => {
+                    const element = document.createElement('div');
+                    element.classList.add('item'); 
+                    element.innerHTML = `
+    			<h2>${item['En honor a']}</h2>
+    			<p><b>Lugar de Velación:</b> ${item['Lugar de Velaciòn']}</p>
+    			<p><b>Sala:</b> ${item.Sala}</p>
+    			<p><b>Fecha de Inicio:</b> ${item['Fecha de Inicio']}</p>
+    			<p><b>Hora de Inicio:</b> ${item['Hora de Inicio']}</p>
+    			<p><b>Ceremonia Religiosa:</b> ${item['Ceremonia Religiosa']}</p>
+    			<p><b>Fecha Ceremonia:</b> ${item['Fecha Ceremonia']}</p>
+    			<p><b>Hora Ceremonia:</b> ${item['Hora Ceremonia']}</p>
+    			<p><b>Destino Final:</b> ${item['Destino Final']}</p>
+    			<p><b>Fecha:</b> ${item.Fecha}</p>
+    			<p><b>Hora:</b> ${item.Hora}</p>
+			`;
+                    container.appendChild(element);
+                });
+            })
+            .catch(error => {
+                console.error('Hubo un problema con la solicitud:', error);
+                document.getElementById('content-container').innerHTML = `<p style="color: red;">Error al cargar el contenido. Por favor, revisa la consola para más detalles.</p>`;
+            });
+    </script>
+</body>
+</html>
