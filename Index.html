@@ -120,46 +120,54 @@
                     const element = document.createElement('div');
                     element.classList.add('item'); 
                     element.innerHTML = `
-                        <h2>${item['En honor a']}</h2>
+                        <h2>${item['Sala']}</h2>
                         <div class="info-row">
                             <span class="info-label">Lugar de Velación:</span>
-                            <span>${item['Lugar de Velaciòn']}</span>
+                            <span>${item['Folio']}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Sala:</span>
-                            <span>${item.Sala}</span>
+                            <span>${item.Finado}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Fecha de Inicio:</span>
-                            <span>${item['Fecha de Inicio']}</span>
+                            <span>${item['Fecha']}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Hora de Inicio:</span>
-                            <span>${item['Hora de Inicio']}</span>
+                            <span>${item['Pedido 1']}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Ceremonia Religiosa:</span>
-                            <span>${item['Ceremonia Religiosa']}</span>
+                            <span>${item['Pedido 2']}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Fecha Ceremonia:</span>
-                            <span>${item['Fecha Ceremonia']}</span>
+                            <span>${item['Pedido 3']}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Hora Ceremonia:</span>
-                            <span>${item['Hora Ceremonia']}</span>
+                            <span>${item['Pedido 4']}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Destino Final:</span>
-                            <span>${item['Destino Final']}</span>
+                            <span>${item['Pedido 5']}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Fecha:</span>
-                            <span>${item.Fecha}</span>
+                            <span>${item.Pedido 6}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Hora:</span>
-                            <span>${item.Hora}</span>
+                            <span>${item.Pedido 7}</span>
+                        </div>
+                                    <div class="info-row">
+                            <span class="info-label">Hora:</span>
+                            <span>${item.Pedido 8}</span>
+                        </div>
+                                    <div class="info-row">
+                            <span class="info-label">Hora:</span>
+                            <span>${item.Observaciones}</span>
                         </div>
                     `;
                     container.appendChild(element);
